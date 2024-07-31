@@ -10,6 +10,32 @@ function Shop() {
   const [goods, setGoods] = useState([]);
   //состояние загрузки
   const [loading, setLoading] = useState(true);
+  const [order, setOrder] = useState([]);
+
+  //сценарий, когда товар добавляется впервый раз
+  const addToBacket = (item) => {
+    //нужна проверка, что увеличивать quantity
+    const itemIndex = order.findIndex(
+      (orderItem) => orderItem.mainId === item.mainId
+    ); //если вдруг айди найдётся, то мы получим индекс этого массива пример => [{id: 1}, {id: 2}]
+    if (itemIndex < 0) {
+      const newItem = { ...item, quantity: 1 };
+      //функция setOrder должна вернуть нам массив и она у нас возвращает список, который уже есть в массиве и добавляет туда новый объект
+      setOrder([...order, newItem]);
+    } else {
+      const newOrder = order.map((orderItem, index) => {
+        if (index === itemIndex) {
+          return {
+            ...orderItem,
+            quantity: orderItem.quantity + 1,
+          };
+        } else {
+          return orderItem;
+        }
+      });
+      setOrder(newOrder);
+    }
+  };
 
   //создадим useEffect, нужно выполнить операцию один раз. Поэтому массив зависимости будет пустым
   useEffect(function getGoods() {
@@ -20,15 +46,19 @@ function Shop() {
     })
       .then((response) => response.json())
       .then((data) => {
-        data.shop && setGoods(data.shop.slice(0, 24));
+        data.shop && setGoods(data.shop);
         setLoading(false);
       });
   }, []);
 
   return (
     <main className="container content">
-      <Cart length={goods.length} />
-      {loading ? <Preloader /> : <GoodsLits goods={goods} />}
+      <Cart quantity={order.length} />
+      {loading ? (
+        <Preloader />
+      ) : (
+        <GoodsLits goods={goods} addToBasket={addToBacket} />
+      )}
     </main>
   );
 }
