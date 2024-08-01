@@ -4,6 +4,7 @@ import { API_KEY, API_URL } from "../config";
 import { Preloader } from "./Preloader";
 import { GoodsLits } from "./GoodsList";
 import { Cart } from "./Cart";
+import { BasketList } from "./BasketList";
 
 function Shop() {
   //список товаров
@@ -11,6 +12,7 @@ function Shop() {
   //состояние загрузки
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState([]);
+  const [isBasketShow, setBasketShow] = useState(false);
 
   //сценарий, когда товар добавляется впервый раз
   const addToBacket = (item) => {
@@ -37,6 +39,11 @@ function Shop() {
     }
   };
 
+  //функция, которая управляет состоянием показа корзины
+  const handleBasketShow = () => {
+    setBasketShow(!isBasketShow);
+  };
+
   //создадим useEffect, нужно выполнить операцию один раз. Поэтому массив зависимости будет пустым
   useEffect(function getGoods() {
     fetch(API_URL, {
@@ -46,19 +53,20 @@ function Shop() {
     })
       .then((response) => response.json())
       .then((data) => {
-        data.shop && setGoods(data.shop);
+        data.shop && setGoods(data.shop.slice(0, 6));
         setLoading(false);
       });
   }, []);
 
   return (
     <main className="container content">
-      <Cart quantity={order.length} />
+      <Cart quantity={order.length} handleBasketShow={handleBasketShow} />
       {loading ? (
         <Preloader />
       ) : (
         <GoodsLits goods={goods} addToBasket={addToBacket} />
       )}
+      {isBasketShow && <BasketList order={order} />}
     </main>
   );
 }
