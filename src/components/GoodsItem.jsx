@@ -7,7 +7,6 @@ function GoodsItem(props) {
     displayAssets: [{ full_background }],
     addToBasket = Function.prototype,
   } = props;
-
   return (
     <div className="card" id={mainId}>
       <div className="card-image">
