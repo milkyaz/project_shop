@@ -8,9 +8,9 @@ function BasketItem(props) {
 
   return (
     <li className="collection-item ">
-      {displayName} x{quantity} = {regularPrice}
+      {displayName} x{quantity} =
       <span class="secondary-content">
-        <i class="material-icons">close</i>
+        <i class="material-icons basket-delete">close</i>
       </span>
     </li>
   );

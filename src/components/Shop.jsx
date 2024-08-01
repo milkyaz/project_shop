@@ -66,7 +66,7 @@ function Shop() {
       ) : (
         <GoodsLits goods={goods} addToBasket={addToBacket} />
       )}
-      {isBasketShow && <BasketList order={order} />}
+      {isBasketShow && <BasketList order={order}  handleBasketShow={ handleBasketShow} />}
     </main>
   );
 }
