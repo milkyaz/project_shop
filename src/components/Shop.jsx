@@ -39,6 +39,18 @@ function Shop() {
     }
   };
 
+  //удаление товара из корзины
+  const removeFromBasket = (itemId) => {
+    //должны обойти наш order и отфильтровать всё лишнее(один товар), будет какой то элемент и
+    //el.id не должен быть равен itemId(тому индификатору, который мы получим из вне)
+    //у того el.id у которого есть, будет значение false и мы его не добавим в новый наш заказ
+    //после чего
+    const newOrder = order.filter((el) => el.mainId !== itemId);
+    setOrder(newOrder);
+  };
+
+
+
   //функция, которая управляет состоянием показа корзины
   const handleBasketShow = () => {
     setBasketShow(!isBasketShow);
@@ -66,7 +78,13 @@ function Shop() {
       ) : (
         <GoodsLits goods={goods} addToBasket={addToBacket} />
       )}
-      {isBasketShow && <BasketList order={order}  handleBasketShow={ handleBasketShow} />}
+      {isBasketShow && (
+        <BasketList
+          order={order}
+          handleBasketShow={handleBasketShow}
+          removeFromBasket={removeFromBasket}
+        />
+      )}
     </main>
   );
 }
