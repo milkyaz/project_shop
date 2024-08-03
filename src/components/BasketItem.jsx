@@ -1,3 +1,4 @@
+import { Count } from "./Count";
 function BasketItem(props) {
   const {
     mainId,
@@ -5,11 +6,12 @@ function BasketItem(props) {
     // price: {regularPrice},
     quantity,
     removeFromBasket = Function.prototype,
+    increase = Function.prototype
   } = props;
 
   return (
     <li className="collection-item ">
-      {displayName} x{quantity} = {props.regularPrice * quantity} руб.
+      {displayName} x{quantity} = <Count increase={increase} quantity ={quantity} mainId={mainId}/> {props.regularPrice * quantity} руб. 
       <span
         className="secondary-content"
         onClick={() => removeFromBasket(mainId)}

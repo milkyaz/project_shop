@@ -49,7 +49,11 @@ function Shop() {
     setOrder(newOrder);
   };
 
+  //счетчик товаров
+  const increase = (mainId) => {
+    console.log("Increase", mainId);
 
+  };
 
   //функция, которая управляет состоянием показа корзины
   const handleBasketShow = () => {
@@ -83,6 +87,7 @@ function Shop() {
           order={order}
           handleBasketShow={handleBasketShow}
           removeFromBasket={removeFromBasket}
+          increase={increase}
         />
       )}
     </main>
