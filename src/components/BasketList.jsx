@@ -1,5 +1,4 @@
 import { BasketItem } from "./BasketItem";
-import { Count } from "./Count";
 
 function BasketList(props) {
   //препдолагаем что order - массив
@@ -37,6 +36,7 @@ function BasketList(props) {
 
       <li className="collection-item active">
         Общая стоимость: {totalPrice} руб.
+        <button className="secondary-content btn-small">Оформить</button>
       </li>
 
       <li className="material-icons basket-close" onClick={handleBasketShow}>

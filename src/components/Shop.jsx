@@ -5,6 +5,7 @@ import { Preloader } from "./Preloader";
 import { GoodsLits } from "./GoodsList";
 import { Cart } from "./Cart";
 import { BasketList } from "./BasketList";
+import { Alert } from "./Alert";
 
 function Shop() {
   //список товаров
@@ -13,6 +14,7 @@ function Shop() {
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState([]);
   const [isBasketShow, setBasketShow] = useState(false);
+  const [alertName, setAlertName] = useState("");
 
   //сценарий, когда товар добавляется впервый раз
   const addToBacket = (item) => {
@@ -37,6 +39,7 @@ function Shop() {
       });
       setOrder(newOrder);
     }
+    setAlertName(item.displayName);
   };
 
   //удаление товара из корзины
@@ -85,6 +88,11 @@ function Shop() {
     setBasketShow(!isBasketShow);
   };
 
+  //функция будет восстанавливать setAlertName на пустую строку
+  const closeAlert = () => {
+    setAlertName("");
+  };
+
   //создадим useEffect, нужно выполнить операцию один раз. Поэтому массив зависимости будет пустым
   useEffect(function getGoods() {
     fetch(API_URL, {
@@ -94,7 +102,7 @@ function Shop() {
     })
       .then((response) => response.json())
       .then((data) => {
-        data.shop && setGoods(data.shop.slice(0, 6));
+        data.shop && setGoods(data.shop.slice(0, 12));
         setLoading(false);
       });
   }, []);
@@ -117,6 +125,7 @@ function Shop() {
           decrease={decrease}
         />
       )}
+      {alertName && <Alert name={alertName} closeAlert={closeAlert} />}
     </main>
   );
 }
