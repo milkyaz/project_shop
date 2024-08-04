@@ -5,7 +5,12 @@ function Footer() {
       <div className="footer-copyright">
         <div className="container">
           © {new Date().getFullYear()} Copyright Text
-          <a className="grey-text text-lighten-4 right" href="#!">
+          <a
+            className="grey-text text-lighten-4 right"
+            href="https://milkyaz.github.io/project_shop"
+            target="_blank"
+            rel="noreferrer"
+          >
             More Links
           </a>
         </div>
@@ -14,4 +19,4 @@ function Footer() {
   );
 }
 
-export {Footer}
+export { Footer };

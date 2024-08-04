@@ -7,7 +7,7 @@ function Header() {
         </a>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li>
-            <a href="sass.html">Sass</a>
+            <a href="https://milkyaz.github.io/project_shop" target="_blank" rel="noreferrer">Sass</a>
           </li>
         </ul>
       </div>
