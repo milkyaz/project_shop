@@ -52,7 +52,32 @@ function Shop() {
   //счетчик товаров
   const increase = (mainId) => {
     console.log("Increase", mainId);
+    setOrder((order) => {
+      return order.map((el) => {
+        if (el.mainId === mainId) {
+          return {
+            ...el,
+            quantity: el.quantity + 1,
+          };
+        }
+        return el;
+      });
+    });
+  };
 
+  const decrease = (mainId) => {
+    console.log("decrease", mainId);
+    setOrder((order) => {
+      return order.map((el) => {
+        if (el.mainId === mainId) {
+          return {
+            ...el,
+            quantity: el.quantity - 1 > 1 ? --el.quantity : 1,
+          };
+        }
+        return el;
+      });
+    });
   };
 
   //функция, которая управляет состоянием показа корзины
@@ -84,10 +109,12 @@ function Shop() {
       )}
       {isBasketShow && (
         <BasketList
+          key={order.mainId}
           order={order}
           handleBasketShow={handleBasketShow}
           removeFromBasket={removeFromBasket}
           increase={increase}
+          decrease={decrease}
         />
       )}
     </main>

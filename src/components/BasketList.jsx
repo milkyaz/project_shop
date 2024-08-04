@@ -8,6 +8,7 @@ function BasketList(props) {
     handleBasketShow = Function.prototype,
     removeFromBasket = Function.prototype,
     increase = Function.prototype,
+    decrease = Function.prototype,
   } = props;
 
   const totalPrice = order.reduce((sum, el) => {
@@ -26,6 +27,7 @@ function BasketList(props) {
             key={item.mainId}
             removeFromBasket={removeFromBasket}
             increase={increase}
+            decrease={decrease}
             {...item}
           />
         ))
@@ -34,9 +36,9 @@ function BasketList(props) {
       )}
 
       <li className="collection-item active">
-        Общая стоимость: {totalPrice}    руб.
+        Общая стоимость: {totalPrice} руб.
       </li>
-    
+
       <li className="material-icons basket-close" onClick={handleBasketShow}>
         close
       </li>

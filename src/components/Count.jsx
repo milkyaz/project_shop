@@ -16,12 +16,18 @@ const Count = (props) => {
             props.increase(props.mainId);
           }}
           type="button"
-          className="count__up"
+          className="material-icons"
         >
-          +
+          arrow_drop_up
         </button>
-        <button type="button" className="count__down">
-          -
+        <button
+          onClick={() => {
+            props.decrease(props.mainId);
+          }}
+          type="button"
+          className="material-icons"
+        >
+          arrow_drop_down
         </button>
       </div>
     </div>
