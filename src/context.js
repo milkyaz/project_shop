@@ -24,8 +24,8 @@ export const ContextProvider = ({ children }) => {
     dispatch({ type: "REMOVE_FROM_BASKET", payload: { id: itemId } });
   };
 
-  value.addToBacket = (item) => {
-    dispatch({ type: "ADD_TO_BACKET", payload: item });
+  value.addToBasket = (item) => {
+    dispatch({ type: "ADD_TO_BASKET", payload: item });
   };
 
   value.increase = (mainId) => {
@@ -39,8 +39,10 @@ export const ContextProvider = ({ children }) => {
   value.handleBasketShow = () => {
     dispatch({ type: "TOGGLE_BASKET" });
   };
-  //   const value = {
-  //     example: "hello form context",
-  //   };
+
+  value.setGoods = (data) => {
+    dispatch({ type: "SET_GOODS", payload: data });
+  };
+
   return <ShopContext.Provider value={value}>{children}</ShopContext.Provider>;
 };

@@ -7,13 +7,9 @@ function BasketItem(props) {
     displayName,
     // price: {regularPrice},
     quantity,
-    removeFromBasket = Function.prototype,
-    increase = Function.prototype,
-    decrease = Function.prototype,
   } = props;
 
-  const { example } = useContext(ShopContext);
-  console.log(example);
+  const { removeFromBasket, increase, decrease } = useContext(ShopContext);
 
   return (
     <li className="collection-item ">
